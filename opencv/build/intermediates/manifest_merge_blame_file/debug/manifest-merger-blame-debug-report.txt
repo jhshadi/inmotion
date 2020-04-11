@@ -1,0 +1,20 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="org.opencv"
+4    android:versionCode="403000"
+5    android:versionName="4.3.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/Users/shlomi/AndroidStudioProjects/InMotion/opencv/java/AndroidManifest.xml
+9        android:targetSdkVersion="26" />
+9-->/Users/shlomi/AndroidStudioProjects/InMotion/opencv/java/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.CAMERA" />
+11-->/Users/shlomi/AndroidStudioProjects/InMotion/opencv/java/AndroidManifest.xml:5:5-65
+11-->/Users/shlomi/AndroidStudioProjects/InMotion/opencv/java/AndroidManifest.xml:5:22-62
+12    <uses-permission android:name="android.permission.CAMERA" />
+12-->/Users/shlomi/AndroidStudioProjects/InMotion/opencv/java/AndroidManifest.xml:5:5-65
+12-->/Users/shlomi/AndroidStudioProjects/InMotion/opencv/java/AndroidManifest.xml:5:22-62
+13
+14</manifest>

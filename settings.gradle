@@ -1,0 +1,4 @@
+rootProject.name='InMotion'
+
+include ':app', 'opencv'
+include ':inmotion'
