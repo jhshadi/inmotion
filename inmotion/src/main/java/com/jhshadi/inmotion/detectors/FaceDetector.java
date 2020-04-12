@@ -47,13 +47,13 @@ public class FaceDetector extends BaseDetector {
 		try {
 			// load cascade file
 			InputStream is = appContext.getResources().openRawResource(
-					R.raw.lbpcascade_frontalface);
+					R.raw.lbpcascade_frontalface_improved);
 
 			Log.i(TAG, "InputStream is " + is);
 			File cascadeDir = appContext
 					.getDir("cascade", Context.MODE_PRIVATE);
 			File cascadeFile = new File(cascadeDir,
-					"lbpcascade_frontalface.xml");
+					"lbpcascade_frontalface_improved.xml");
 			FileOutputStream os = new FileOutputStream(cascadeFile);
 
 			byte[] buffer = new byte[4096];
