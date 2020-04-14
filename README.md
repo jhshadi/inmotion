@@ -8,5 +8,6 @@ sdk.dir=<path to sdk>
 
 opencvsdk.dir=<path to opencv root dir>
 ```
+- Need to move the above properties to a new file as the above generated automaitcally.
 - Need to change the way opencv is imported to the project (from the Android Studio way to the opencv way.. full instructions are in the `build.gradle` under the opencv project)
 - Migrate to Android CameraX instead of using opencv implementation for the surfaceview and camera2 API's
