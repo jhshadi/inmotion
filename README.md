@@ -1,5 +1,13 @@
 # InMotion
 
+### init repo:
+- download opencv 4.3.0
+- create `inmotion.local.properties` with the following lines:
+```
+inmotion.opencvsdk.dir=<path to root opencv library>
+```
+
+
 ### TODO:
 - need to add those variables to `local.properties`:
 ```
