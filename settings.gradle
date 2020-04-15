@@ -1,4 +1,10 @@
 rootProject.name='InMotion'
 
-include ':app', 'opencv'
+Properties properties = new Properties()
+properties.load(new File(rootDir.absolutePath + '/inmotion.local.properties').newDataInputStream())
+
+include ':app'
 include ':inmotion'
+
+include ':opencv'
+project(':opencv').projectDir = new File(properties.get('inmotion.opencvsdk.dir') + '/sdk')
