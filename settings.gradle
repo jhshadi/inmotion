@@ -1,10 +1,23 @@
-rootProject.name='InMotion'
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
 
-Properties properties = new Properties()
-properties.load(new File(rootDir.absolutePath + '/inmotion.local.properties').newDataInputStream())
-
-include ':app'
+rootProject.name = "inmotion"
 include ':inmotion'
-
-include ':opencv'
-project(':opencv').projectDir = new File(properties.get('inmotion.opencvsdk.dir') + '/sdk')

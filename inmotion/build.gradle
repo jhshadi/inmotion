@@ -1,25 +1,24 @@
-apply plugin: 'com.android.library'
+plugins {
+    alias(libs.plugins.android.library)
+}
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
-
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('inmotion.local.properties').newDataInputStream())
+    namespace 'dev.jhshadi.inmotion'
+    compileSdk 34
 
     defaultConfig {
-        minSdkVersion 25
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdk 29
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles 'consumer-rules.pro'
+        consumerProguardFiles "consumer-rules.pro"
 
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11 -frtti -fexceptions"
-                arguments "-DOpenCV_DIR=" + properties.get('inmotion.opencvsdk.dir') + "/sdk/native/jni" // , "-DANDROID_ARM_NEON=TRUE"
+                arguments "-DOPENCV_VERSION_MAJOR=4",
+                        "-DOPENCV_FROM_SDK=FALSE",
+                        "-DANDROID_TOOLCHAIN=clang",
+                        "-DANDROID_STL=c++_shared"
             }
         }
     }
@@ -30,24 +29,37 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
-        sourceCompatibility = 1.8
-        targetCompatibility = 1.8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     externalNativeBuild {
         cmake {
-            path (project.projectDir.toString() + '/CMakeLists.txt')
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.22.1'
         }
     }
+
+    buildFeatures {
+        prefab true // extracts native libraries from AAR for usage in C++
+    }
+
+    packagingOptions {
+        jniLibs {
+            pickFirst '**/libc++_shared.so' // need to pick first as 2 libs are found (`.gradle/caches` and another in `build/intermediates`)
+        }
+    }
+
+    ndkVersion '27.0.12077973'
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation project(path: ':opencv')
+    implementation libs.appcompat
+    implementation libs.material
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+    implementation libs.opencv
 }
