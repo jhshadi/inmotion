@@ -72,14 +72,11 @@ public class InMotion {
     }
 
     public void start() {
-//        System.loadLibrary("opencv_java4");
-        System.loadLibrary("inmotion_jni");
-
         if (OpenCVLoader.initLocal()) {
             Log.i(TAG, "OpenCV loaded successfully");
 
             // Load native library after(!) OpenCV initialization
-            System.loadLibrary("inMotion");
+            System.loadLibrary("inmotion");
 
             mOpenCvCameraView.enableView();
         } else {
