@@ -28,8 +28,4 @@ jobs:
 
 workflows:
   build-and-publish:
-    jobs:
-      - publish:
-          name: Build and Publish
-          context:
-            - maven-creds
+    jobs: []

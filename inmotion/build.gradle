@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
+    id("maven-publish")
 }
 
 android {
@@ -53,6 +54,18 @@ android {
     }
 
     ndkVersion '27.0.12077973'
+}
+
+publishing{
+    publications{
+        maven(MavenPublication) {
+            groupId "${android.namespace.substring(0, android.namespace.lastIndexOf("."))}"
+            artifactId "${android.namespace.substring(android.namespace.lastIndexOf(".")+1)}"
+            version "1.0.0-SNAPSHOT"
+
+            artifact "${layout.buildDirectory.get()}/outputs/aar/inmotion-release.aar"
+        }
+    }
 }
 
 dependencies {
