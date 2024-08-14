@@ -126,7 +126,7 @@ public class AreasDetector extends BaseDetector {
 		// Imgproc.threshold(matAbsDiff, matAbsDiff, 15, 255,
 		// Imgproc.THRESH_BINARY_INV);
 
-		matGreyPrev = matGreyCur;
+		matGreyPrev = matGreyCur.clone(); // need to check also how this should be released later on
 
 		if (isShowMovmentFrame == true) {
 			Imgproc.cvtColor(matAbsDiff, matRgb, Imgproc.COLOR_GRAY2RGB);
