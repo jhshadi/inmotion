@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   publish:
     docker:
-      - image: cimg/openjdk:8.0
+      - image: cimg/android:2024.08-ndk
     resource_class: small
     steps:
       - checkout
