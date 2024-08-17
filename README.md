@@ -12,7 +12,7 @@ The library uses the following camera permissions:
 - `android.hardware.camera.autofocus`
 - `android.hardware.camera.front`
 - `android.hardware.camera.front.autofocus`
-- 
+
 When using it with your app there's no need to declare those permissions, the `inmotion` instance will request for those for you.
 Note that upon user decline for the above permissions there's the app owner will need to handle the app degradation.  
 
