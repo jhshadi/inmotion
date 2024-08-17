@@ -5,7 +5,7 @@ By using InMotion library, Android developers can now create motion based apps e
 
 InMotion uses OpenCV library, extends it and completely encapsulates it to introduce a simple and easy-to-use API specific for motion detection purposes with an emphasis on full functionality and high performance.
 
-[![InMotion & Face Detection Library For The Android](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/K4rInX2TF5I.jpg)](https://www.youtube.com/watch?v=K4rInX2TF5I)
+[![InMotion & Face Detection Library For The Android](https://img.youtube.com/vi/K4rInX2TF5I/0.jpg)](https://www.youtube.com/watch?v=K4rInX2TF5I)
 
 ## Library Permissions
 The library uses the following camera permissions:
