@@ -1,8 +1,12 @@
 package dev.jhshadi.inmotion;
 
-import android.app.Activity;
+import android.Manifest;
 import android.util.Log;
 import android.view.SurfaceView;
+
+import androidx.activity.ComponentActivity;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
@@ -22,11 +26,12 @@ public class InMotion {
     private static final int DEFAULT_MAX_FRAME_HEIGHT = 720;
     private static final boolean DEFAULT_IS_INMOTION_EVENTS_ON = true;
     private static final boolean DEFAULT_IS_FLIP_FRAME = false;
+    public static final int PERMISSION_REQUEST_CODE = 200;
 
     // Data Members
     private InMotionCameraViewListener mCameraViewListener;
 
-    private Activity mAppContext;
+    private ComponentActivity mAppContext;
     private InMotionBaseDetctorListener mInMotionInitDetectorListener;
     private InMotionJavaCameraView mOpenCvCameraView;
 //    private InMotionBaseLoaderCallback mLoaderCallback;
@@ -40,14 +45,14 @@ public class InMotion {
     private boolean isInMotionEventsOn;
     private boolean isFlipFrame;
 
-    public InMotion(Activity appContext,
+    public InMotion(ComponentActivity appContext,
                     InMotionBaseDetctorListener inMotionInitDetectorListener,
                     InMotionJavaCameraView inMotionJavaCameraView) {
         this(appContext, inMotionInitDetectorListener, inMotionJavaCameraView,
                 DEFAULT_MAX_FRAME_WIDTH, DEFAULT_MAX_FRAME_HEIGHT);
     }
 
-    public InMotion(Activity appContext,
+    public InMotion(ComponentActivity appContext,
                     InMotionBaseDetctorListener inMotionInitDetectorListener,
                     InMotionJavaCameraView inMotionJavaCameraView, int maxFrameWidth,
                     int maxFrameHeight) {
@@ -66,9 +71,21 @@ public class InMotion {
         this.mCameraViewListener = new InMotionCameraViewListener();
 
         this.mOpenCvCameraView = inMotionJavaCameraView;
-        mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
-        mOpenCvCameraView.setMaxFrameSize(maxFrameWidth, maxFrameHeight);
-        mOpenCvCameraView.setCvCameraViewListener(mCameraViewListener);
+        this.mOpenCvCameraView.setVisibility(SurfaceView.VISIBLE);
+        this.mOpenCvCameraView.setMaxFrameSize(maxFrameWidth, maxFrameHeight);
+        this.mOpenCvCameraView.setCvCameraViewListener(mCameraViewListener);
+        this.mOpenCvCameraView.enableView();
+
+        ActivityResultLauncher<String> requestPermissionLauncher = mAppContext.registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+            if (isGranted) {
+                mOpenCvCameraView.setCameraPermissionGranted();
+            } else {
+                // TODO: update this to checked exception or start a permission denied activity (or a modal to exit the application)
+                throw new RuntimeException("Permission not granted");
+            }
+        });
+
+        requestPermissionLauncher.launch(Manifest.permission.CAMERA);
     }
 
     public void start() {
@@ -153,8 +170,12 @@ public class InMotion {
         }
 
         public void onCameraViewStopped() {
-            mGray.release();
-            mRgba.release();
+            if (mGray != null) {
+                mGray.release();
+            }
+            if (mRgba != null) {
+                mRgba.release();
+            }
 
             if (mDetector != null) {
                 mDetector.stop();
