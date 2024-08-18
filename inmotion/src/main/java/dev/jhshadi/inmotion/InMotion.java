@@ -26,7 +26,6 @@ public class InMotion {
     private static final int DEFAULT_MAX_FRAME_HEIGHT = 720;
     private static final boolean DEFAULT_IS_INMOTION_EVENTS_ON = true;
     private static final boolean DEFAULT_IS_FLIP_FRAME = false;
-    public static final int PERMISSION_REQUEST_CODE = 200;
 
     // Data Members
     private InMotionCameraViewListener mCameraViewListener;
@@ -81,7 +80,7 @@ public class InMotion {
                 mOpenCvCameraView.setCameraPermissionGranted();
             } else {
                 // TODO: update this to checked exception or start a permission denied activity (or a modal to exit the application)
-                throw new RuntimeException("Permission not granted");
+                throw new RuntimeException(String.format("Permission not granted! [%s]", Manifest.permission.CAMERA));
             }
         });
 
@@ -220,5 +219,4 @@ public class InMotion {
     public void setFlipFrame(boolean isFlipFrame) {
         this.isFlipFrame = isFlipFrame;
     }
-
 }
