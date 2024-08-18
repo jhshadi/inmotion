@@ -17,10 +17,10 @@ import dev.jhshadi.inmotion.detectors.Area;
 import dev.jhshadi.inmotion.detectors.AreaRect;
 import dev.jhshadi.inmotion.detectors.AreasDetector;
 import dev.jhshadi.inmotion.detectors.BaseDetector;
-import dev.jhshadi.inmotion.detectors.InMotionAreasDetctorListener;
+import dev.jhshadi.inmotion.detectors.InMotionAreasDetectorListener;
 import dev.jhshadi.inmotion.util.Scaler;
 
-class GestureDispatcher implements InMotionAreasDetctorListener {
+class GestureDispatcher implements InMotionAreasDetectorListener {
 
 	// Consts
 	private static final int DEFAULT_RADIUS_SIZE = 50;
@@ -93,9 +93,9 @@ class GestureDispatcher implements InMotionAreasDetctorListener {
 		}
 
 		detector.setDrawState(true);
-		detector.setShowMovmentFrame(true);
+		detector.setShowMovementFrame(true);
 		detector.setDiffThreshold(DEFAULT_DETECTOR_THRESHOLD);
-		detector.setApplayBlur(true);
+		detector.setApplyBlur(true);
 
 		calculateActualThreshold(frameWidth, frameHeight);
 		initScaler(frameWidth, frameHeight);
@@ -135,7 +135,7 @@ class GestureDispatcher implements InMotionAreasDetctorListener {
 
 	// Gesture dispatch functions
 	@Override
-	public void onAreaMovment(AreasDetector detector, final Area currArea) {
+	public void onAreaMovement(AreasDetector detector, final Area currArea) {
 
 		// Log.i("SCALER", "scaler: " + mScaler.toString());
 

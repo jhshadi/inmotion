@@ -1,7 +1,6 @@
 package dev.jhshadi.inmotion.detectors;
 
+public interface InMotionFaceDetectorListener extends InMotionBaseDetectorListener {
 
-public interface InMotionFaceDetectorListener extends InMotionBaseDetctorListener {
-
-	public void onFaceMovement(FaceDetector detector, Face face);
+    void onFaceMovement(FaceDetector detector, Face face);
 }

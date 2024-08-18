@@ -63,11 +63,11 @@ public class InMotionJavaCameraView extends JavaCamera2View {
     }
 
     // Stretch preview frame
-    public void strechPreviewSizeWidth(int width) {
+    public void stretchPreviewSizeWidth(int width) {
         setScale(mFrameWidth, width);
     }
 
-    public void strechPreviewSizeHeight(int height) {
+    public void stretchPreviewSizeHeight(int height) {
         setScale(mFrameHeight, height);
     }
 

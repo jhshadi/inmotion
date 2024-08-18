@@ -16,7 +16,7 @@ import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 
 import dev.jhshadi.inmotion.detectors.BaseDetector;
-import dev.jhshadi.inmotion.detectors.InMotionBaseDetctorListener;
+import dev.jhshadi.inmotion.detectors.InMotionBaseDetectorListener;
 
 public class InMotion {
     private static final String TAG = "InMotion::class";
@@ -31,7 +31,7 @@ public class InMotion {
     private InMotionCameraViewListener mCameraViewListener;
 
     private ComponentActivity mAppContext;
-    private InMotionBaseDetctorListener mInMotionInitDetectorListener;
+    private InMotionBaseDetectorListener mInMotionInitDetectorListener;
     private InMotionJavaCameraView mOpenCvCameraView;
 
     private BaseDetector mDetector;
@@ -44,14 +44,14 @@ public class InMotion {
     private boolean isFlipFrame;
 
     public InMotion(ComponentActivity appContext,
-                    InMotionBaseDetctorListener inMotionInitDetectorListener,
+                    InMotionBaseDetectorListener inMotionInitDetectorListener,
                     InMotionJavaCameraView inMotionJavaCameraView) {
         this(appContext, inMotionInitDetectorListener, inMotionJavaCameraView,
                 DEFAULT_MAX_FRAME_WIDTH, DEFAULT_MAX_FRAME_HEIGHT);
     }
 
     public InMotion(ComponentActivity appContext,
-                    InMotionBaseDetctorListener inMotionInitDetectorListener,
+                    InMotionBaseDetectorListener inMotionInitDetectorListener,
                     InMotionJavaCameraView inMotionJavaCameraView, int maxFrameWidth,
                     int maxFrameHeight) {
         Log.i(TAG, "Instantiated new " + this.getClass());
@@ -122,7 +122,7 @@ public class InMotion {
 
             BaseDetector.setFrameSize(width, height);
 
-            // Run only once if detector is uninstantiated
+            // Run only once if detector is un-instantiated
             if (mDetector == null) {
                 if (mInMotionInitDetectorListener != null
                         && (mDetector = mInMotionInitDetectorListener

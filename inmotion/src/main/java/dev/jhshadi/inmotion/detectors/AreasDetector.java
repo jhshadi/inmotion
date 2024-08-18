@@ -16,10 +16,10 @@ public class AreasDetector extends BaseDetector {
 	private static final String TAG = "AreasDetector::class";
 
 	// Consts
-	private static final boolean DEFAULT_IS_APPLAY_BLUR = false; 		// Reduce noise but cause slow performance
-	private static final boolean DEFAULT_IS_SHOW_MOVMENT_FRAME = false; // Show absdiff mat instead of frame (good for debug)
-	private static final int MAX_DIFF_THRESHOLD = 100;					// Set the threshhold for absDiff
-	private static final int DEFAULT_DIFF_THRESHOLD = 10; 				// Set the threshhold for absDiff
+	private static final boolean DEFAULT_IS_APPLY_BLUR = false; 			// Reduce noise but cause slow performance
+	private static final boolean DEFAULT_IS_SHOW_MOVEMENT_FRAME = false;	// Show absdiff mat instead of frame (good for debug)
+	private static final int MAX_DIFF_THRESHOLD = 100;						// Set the threshold for absDiff
+	private static final int DEFAULT_DIFF_THRESHOLD = 10; 					// Set the threshold for absDiff
 
 	// Data Members
 	private List<Area> areas = new ArrayList<>();
@@ -29,34 +29,34 @@ public class AreasDetector extends BaseDetector {
 	private Mat matKernel;
 
 	// Settings
-	private boolean isApplayBlur;
-	private boolean isShowMovmentFrame;
+	private boolean isApplyBlur;
+	private boolean isShowMovementFrame;
 	private int diffThreshold;
 
 	// C'tor
 	public AreasDetector() {
 		Log.i(TAG, "Instantiated new " + this.getClass());
 
-		isApplayBlur = DEFAULT_IS_APPLAY_BLUR;
-		isShowMovmentFrame = DEFAULT_IS_SHOW_MOVMENT_FRAME;
+		isApplyBlur = DEFAULT_IS_APPLY_BLUR;
+		isShowMovementFrame = DEFAULT_IS_SHOW_MOVEMENT_FRAME;
 		diffThreshold = DEFAULT_DIFF_THRESHOLD;
 	}
 
 	// Getter/Setter
-	public boolean isApplayBlur() {
-		return isApplayBlur;
+	public boolean isApplyBlur() {
+		return isApplyBlur;
 	}
 
-	public void setApplayBlur(boolean isApplayBlur) {
-		this.isApplayBlur = isApplayBlur;
+	public void setApplyBlur(boolean isApplyBlur) {
+		this.isApplyBlur = isApplyBlur;
 	}
 
-	public boolean isShowMovmentFrame() {
-		return isShowMovmentFrame;
+	public boolean isShowMovementFrame() {
+		return isShowMovementFrame;
 	}
 
-	public void setShowMovmentFrame(boolean isShowMovmentFrame) {
-		this.isShowMovmentFrame = isShowMovmentFrame;
+	public void setShowMovementFrame(boolean isShowMovementFrame) {
+		this.isShowMovementFrame = isShowMovementFrame;
 	}
 
 	public int getDiffThreshold() {
@@ -119,7 +119,7 @@ public class AreasDetector extends BaseDetector {
 
 		detectMotion(matGreyPrev.getNativeObjAddr(),
 				matGreyCur.getNativeObjAddr(), matAbsDiff.getNativeObjAddr(),
-				matKernel.getNativeObjAddr(), isApplayBlur, diffThreshold);
+				matKernel.getNativeObjAddr(), isApplyBlur, diffThreshold);
 
 		// Core.absdiff(matGreyPrev, matGreyCur, matAbsDiff);
 		// Imgproc.blur(matAbsDiff, matAbsDiff, new Size(7, 7));
@@ -128,7 +128,7 @@ public class AreasDetector extends BaseDetector {
 
 		matGreyPrev = matGreyCur.clone(); // need to check also how this should be released later on
 
-		if (isShowMovmentFrame == true) {
+		if (isShowMovementFrame == true) {
 			Imgproc.cvtColor(matAbsDiff, matRgb, Imgproc.COLOR_GRAY2RGB);
 		}
 
@@ -136,7 +136,7 @@ public class AreasDetector extends BaseDetector {
 
 			if (area.isActive() == true) {
 
-				area.setMovementLevel(checkAreaMovment(
+				area.setMovementLevel(checkAreaMovement(
 						matAbsDiff.getNativeObjAddr(), area.getLeft(),
 						area.getTop(), area.getRight(), area.getBottom(),
 						area.getThreshold(), area.getGravityPointAsArray()));
@@ -159,8 +159,8 @@ public class AreasDetector extends BaseDetector {
 					}
 
 					if (mDetectorListener != null) {
-						((InMotionAreasDetctorListener) mDetectorListener)
-								.onAreaMovment(this, area);
+						((InMotionAreasDetectorListener) mDetectorListener)
+								.onAreaMovement(this, area);
 					}
 				}
 			}
@@ -172,9 +172,9 @@ public class AreasDetector extends BaseDetector {
 			long matAddrRes, long matKernel, boolean isApplayBlur,
 			int diffThreshold);
 
-	private native boolean calcMovmentGravity(long matAddrRes, int mLeft,
+	private native boolean calcMovementGravity(long matAddrRes, int mLeft,
 			int mTop, int mRight, int mBottom, int resX, int resY);
 
-	private native int checkAreaMovment(long matAddrRes, int mLeft, int mTop,
+	private native int checkAreaMovement(long matAddrRes, int mLeft, int mTop,
 			int mRight, int mBottom, float mThresh, int[] mAvgPoint);
 }

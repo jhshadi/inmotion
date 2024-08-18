@@ -18,7 +18,7 @@ public abstract class BaseDetector {
 	protected static int frameHeight;
 	
 	// Data Members
-	protected InMotionBaseDetctorListener mDetectorListener = null;
+	protected InMotionBaseDetectorListener mDetectorListener = null;
 
 
 	// Getter/Setter
@@ -27,11 +27,11 @@ public abstract class BaseDetector {
 		BaseDetector.frameHeight = frameHeight;
 	}
 	
-	public void setDetectorListener(InMotionBaseDetctorListener mListener) {
+	public void setDetectorListener(InMotionBaseDetectorListener mListener) {
 		this.mDetectorListener = mListener;
 	}
 
-	public InMotionBaseDetctorListener getDetectorListener() {
+	public InMotionBaseDetectorListener getDetectorListener() {
 		return mDetectorListener;
 	}
 	

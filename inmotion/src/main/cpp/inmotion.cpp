@@ -21,8 +21,8 @@ using namespace cv;
 extern "C" {
 
 	JNIEXPORT void JNICALL Java_dev_jhshadi_inmotion_detectors_AreasDetector_detectMotion(JNIEnv* jenv, jobject, jlong matAddrGr1, jlong matAddrGr2, jlong matAddrRes, jlong matAddrKernel, jboolean isApplayBlur, jint diffThreshhold);
-	JNIEXPORT jboolean JNICALL Java_dev_jhshadi_inmotion_detectors_AreasDetector_calcMovmentGravity(JNIEnv* jenv, jobject, jlong matAddrRes, jint mLeft, jint mTop, jint mRight, jint mBottom, jint resX, jint resY);
-	JNIEXPORT jint JNICALL Java_dev_jhshadi_inmotion_detectors_AreasDetector_checkAreaMovment(JNIEnv* jenv, jobject, jlong matAddrRes, jint mLeft, jint mTop, jint mRight, jint mBottom, jfloat mThresh, jintArray mAvgPoint);
+	JNIEXPORT jboolean JNICALL Java_dev_jhshadi_inmotion_detectors_AreasDetector_calcMovementGravity(JNIEnv* jenv, jobject, jlong matAddrRes, jint mLeft, jint mTop, jint mRight, jint mBottom, jint resX, jint resY);
+	JNIEXPORT jint JNICALL Java_dev_jhshadi_inmotion_detectors_AreasDetector_checkAreaMovement(JNIEnv* jenv, jobject, jlong matAddrRes, jint mLeft, jint mTop, jint mRight, jint mBottom, jfloat mThresh, jintArray mAvgPoint);
 
 	JNIEXPORT jlong JNICALL Java_dev_jhshadi_inmotion_detectors_FaceDetector_nativeCreateObject(JNIEnv * jenv, jclass, jstring jFileName, jint faceSize);
 	JNIEXPORT void JNICALL Java_dev_jhshadi_inmotion_detectors_FaceDetector_nativeDestroyObject(JNIEnv * jenv, jclass, jlong thiz);
@@ -93,7 +93,7 @@ extern "C" {
 		//LOGD("Java_dev_inmotion_library_InMotion_detectMotion exit");
 	}
 
-	JNIEXPORT jboolean JNICALL Java_dev_jhshadi_inmotion_detectors_AreasDetector_calcMovmentGravity(JNIEnv* jenv, jobject, jlong matAddrRes, jint mLeft, jint mTop, jint mRight, jint mBottom, jint resX, jint resY)
+	JNIEXPORT jboolean JNICALL Java_dev_jhshadi_inmotion_detectors_AreasDetector_calcMovementGravity(JNIEnv* jenv, jobject, jlong matAddrRes, jint mLeft, jint mTop, jint mRight, jint mBottom, jint resX, jint resY)
 	{
 		//LOGD("Java_dev_inmotion_library_AreasDetector_calcMovmentGravity enter");
 
@@ -128,7 +128,7 @@ extern "C" {
 		return result;
 	}
 
-	JNIEXPORT jint JNICALL Java_dev_jhshadi_inmotion_detectors_AreasDetector_checkAreaMovment(JNIEnv* jenv, jobject, jlong matAddrRes, jint mLeft, jint mTop, jint mRight, jint mBottom, jfloat mThresh, jintArray mAvgPoint)
+	JNIEXPORT jint JNICALL Java_dev_jhshadi_inmotion_detectors_AreasDetector_checkAreaMovement(JNIEnv* jenv, jobject, jlong matAddrRes, jint mLeft, jint mTop, jint mRight, jint mBottom, jfloat mThresh, jintArray mAvgPoint)
 	{
 		//LOGD("Java_dev_inmotion_library_AreasDetector_checkAreasMotion enter");
 
