@@ -61,7 +61,7 @@ publishing{
         maven(MavenPublication) {
             groupId "${android.namespace.substring(0, android.namespace.lastIndexOf("."))}"
             artifactId "${android.namespace.substring(android.namespace.lastIndexOf(".")+1)}"
-            version "1.0-SNAPSHOT"
+            version "1.0.0-SNAPSHOT"
 
             artifact "${layout.buildDirectory.get()}/outputs/aar/inmotion-release.aar"
         }
