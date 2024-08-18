@@ -19,4 +19,5 @@ Note that upon user decline for the above permissions there's the app owner will
 
 
 ### TODO:
+- Need to fix camera size functionality (size always shown as 1024x720)
 - Migrate to Android CameraX instead of using opencv implementation for the surfaceview and camera2 API's
