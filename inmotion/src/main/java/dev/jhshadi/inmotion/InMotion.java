@@ -33,7 +33,6 @@ public class InMotion {
     private ComponentActivity mAppContext;
     private InMotionBaseDetctorListener mInMotionInitDetectorListener;
     private InMotionJavaCameraView mOpenCvCameraView;
-//    private InMotionBaseLoaderCallback mLoaderCallback;
 
     private BaseDetector mDetector;
     private Mat mRgba;
@@ -113,35 +112,6 @@ public class InMotion {
             mDetector = null;
         }
     }
-
-    // InMotion Loader (openCV manager & native lib)
-//    private class InMotionBaseLoaderCallback extends BaseLoaderCallback {
-//        private static final String TAG = "InMotion::class";
-//
-//        public InMotionBaseLoaderCallback(Context AppContext) {
-//            super(AppContext);
-//        }
-//
-//        @Override
-//        public void onManagerConnected(int status) {
-//            switch (status) {
-//                case LoaderCallbackInterface.SUCCESS: {
-//                    Log.i(TAG, "OpenCV loaded successfully");
-//
-//                    // Load native library after(!) OpenCV initialization
-//                    System.loadLibrary("inMotion");
-//
-//                    mOpenCvCameraView.enableView();
-//
-//                }
-//                break;
-//                default: {
-//                    super.onManagerConnected(status);
-//                }
-//                break;
-//            }
-//        }
-//    }
 
     // InMotion Camera View Listener
     private class InMotionCameraViewListener implements CvCameraViewListener2 {
