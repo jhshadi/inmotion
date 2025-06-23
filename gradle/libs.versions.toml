@@ -17,4 +17,5 @@ opencv = { module = "org.opencv:opencv", version.ref = "opencv" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
+maven-publish = { id = "maven-publish" }
 

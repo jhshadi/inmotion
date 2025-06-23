@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    id("maven-publish")
+    alias(libs.plugins.maven.publish)
 }
 
 android {
@@ -54,27 +54,42 @@ android {
     }
 
     ndkVersion '27.0.12077973'
-}
 
-publishing{
-    publications{
-        maven(MavenPublication) {
-            groupId "${android.namespace.substring(0, android.namespace.lastIndexOf("."))}"
-            artifactId "${android.namespace.substring(android.namespace.lastIndexOf(".")+1)}"
-            version "1.0.0-SNAPSHOT"
-
-            artifact "${layout.buildDirectory.get()}/outputs/aar/inmotion-release.aar"
-        }
+    publishing {
+        singleVariant("release")
     }
 }
 
-tasks.register('cleanAssembleAndPublishLocal') {
-    group = 'publishing'
-    description = 'clean, assemble and publish to maven local'
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'dev.jhshadi'
+            artifactId = 'inmotion'
+            version = '1.0.0-SNAPSHOT'
 
-    assemble.mustRunAfter(clean)
-    publishMavenPublicationToMavenLocal.mustRunAfter(bundleReleaseAar)
-    dependsOn(clean, assemble, publishToMavenLocal)
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'repsyMavenRepository'
+            url = uri("https://repo.repsy.io/mvn/jhshadi/inmotion")
+            credentials {
+                Properties properties = new Properties()
+                properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+                username = properties.getProperty('repsyMavenUsername') ?: System.getenv("REPSY_MAVEN_USERNAME")
+                password = properties.getProperty('repsyMavenToken') ?: System.getenv("REPSY_MAVEN_TOKEN")
+            }
+        }
+        maven {
+            name = 'localMavenRepository'
+            url = layout.buildDirectory.dir("repo")
+        }
+    }
 }
 
 dependencies {
