@@ -17,14 +17,14 @@ jobs:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
       - run:
           name: Build Module
-          command: ./gradlew assembleRelease
+          command: ./gradlew assembleRelease --info
       - save_cache:
           key: cache-{{ checksum "/tmp/CIRCLECI_CACHE_KEY" }}
           paths:
             - ~/.gradle/caches
       - run:
           name: Publish Image
-          command: ./gradlew publish
+          command: ./gradlew publish --info
 
 workflows:
   build-and-publish:
