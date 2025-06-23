@@ -78,7 +78,7 @@ publishing {
             name = 'repsyMavenRepository'
             url = uri("https://repo.repsy.io/mvn/jhshadi/inmotion")
             credentials {
-                localPropertiesFile = rootProject.file('local.properties')
+                localPropertiesFile = project.rootProject.file('local.properties')
                 Properties properties = new Properties()
 
                 if (localPropertiesFile.exists()) {
