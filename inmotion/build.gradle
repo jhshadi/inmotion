@@ -69,7 +69,7 @@ publishing {
 
 
             afterEvaluate {
-                from components.release
+                from components.findByName('release')
             }
         }
     }
