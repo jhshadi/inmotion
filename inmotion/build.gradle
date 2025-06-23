@@ -76,13 +76,14 @@ publishing {
     repositories {
         maven {
             name = 'repsyMavenRepository'
-            url = uri("https://repo.repsy.io/mvn/jhshadi/inmotion")
-            credentials {
-                Properties properties = new Properties()
-                if (project.rootProject.file('local.properties').exists()) {
-                    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-                }
 
+            Properties properties = new Properties()
+            if (project.rootProject.file('local.properties').exists()) {
+                properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            }
+
+            url = uri(properties.getProperty('repsyMavenUrl') ?: System.getenv("REPSY_MAVEN_URL"))
+            credentials {
                 username = properties.getProperty('repsyMavenUsername') ?: System.getenv("REPSY_MAVEN_USERNAME")
                 password = properties.getProperty('repsyMavenToken') ?: System.getenv("REPSY_MAVEN_TOKEN")
             }
